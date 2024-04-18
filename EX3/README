@@ -1,0 +1,88 @@
+itanini
+207047150
+
+1
+list of the added strategies:
+CameraChangeStrategy
+DoubleStrategy
+HeartStrategy
+PaddleStrategy
+PucksStrategy
+BallHitCounter
+puck
+Heart
+secondaryPaddle
+StrategyFactory
+StrategiesEnums
+
+ I built the exercise on the basis of the previous exercise, when maintaining the API was my guideline.
+  In addition, I tried to write modular code, as much as possible,
+   by using a factory that knows how to produce each of the strategies,
+    using constants with informative names,
+and maintaining encapsulation.
+Most of the added code is in the strategy package.
+ All the classes in this package inherit from the collisionStrategy class that was already
+  coded in the first part of the exercise, when each class implements a decorator of the onCollision function
+   that is implemented in the collisionStrategy class. The inheriting strategies add functionality
+    to the elementary operations of clearing the brick of the window and lowering the bricks counter.
+ The classes I added in the implementation of the second part:
+The strategies package contains:
+CameraChangeStrategy
+DoubleStrategy
+HeartStrategy
+PaddleStrategy
+PucksStrategy
+
+In addition, I created a counter that counts the number of hits of the ball on other objects,
+ To add the functionality of turning off the camera following affect.
+  This counter inherits from the provided counter class. In the Counters package:
+BallHitCounter
+
+The gameobjects package contains (apart from ex3_1 objects):
+puck (extends ball) -I added the class in order to add functionality of deleting
+ the pack after exiting the window.
+Heart
+secondaryPaddle (extends Paddle) - I added in order to add the functionality of counting paddle hits.
+-All of the above inherit from gameObjects class that was provided to us.
+
+
+Factories package contains:
+StrategyFactory which create all kinds of strategies.
+ I chose to also produce most of the arguments that are required for the strategies within the factory,
+  And this is in order to make the codes in the strategies shorter and simpler,
+   as well as to make the code more modular (for example the heart that is needed
+for HeartStrategy manufactured in a factory)
+
+In addition, I created an Strategy types Enum that the factory receives. It's called:
+StrategiesEnums.
+
+The factory's buildStrategy function receives as arguments the location and size of the brick.
+ I was considering whether to add the size element or not,
+  and I chose to add it so that in the future we can use the same strategies for bricks of different sizes
+   (for example to produce large pucks for a larger brick.)
+2.
+I thought it would be right to use the factory that produced the strategies,
+ in order to concentrate the required arguments in one place, in this way it is easy to add or remove
+  strategies as required. I thought it would be right if the classes I added inherited from parent classes,
+   since all of them add additional functionality to the onCollosion function, but use the same discipline.
+    hence, I thought using decorators would be appropriate.
+
+3.
+I chose to implement the double behavior without using recursion, in order to simplify the code.
+The double strategy maintains a list of strategy enums, and randomize a maximum number of  MAX_POW_UP
+ (a constant defined within the strategies factory) into an array.
+ If at one of the times another double strategy is drawn, it draws an additional behavior.
+  At most additionalDoubles (an argoument given by the strategy factory)
+   additional double strategies will be drawn.
+In this way we do not create additional and unnecessary strategy objects, but only increase the amount
+ of strategies in the array of the original double strategy. The entire lottery is done using loops.
+
+4.
+Only after the enums are drawn the factory (supplied to the strategy as an argument) generates the drawn
+ strategies and puts them into a list of strategies that is kept as a field.
+  When the brick holding the double strategy is hit, the OnCollison function is called which calls
+  the functionality of each of the strategies in this list.
+
+By changing the constants MAX_POW_UP and additionalDoubles,
+ which are supplied to the strategy by the factory, it is easy to change the amount of strategies
+  that a single brick can hold as well as the amount of additional doubles that can be drawn.

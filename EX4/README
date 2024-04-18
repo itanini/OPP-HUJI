@@ -1,0 +1,64 @@
+itanini
+207047150
+
+
+=============================
+=      File description     =
+=============================
+ascii package-
+    Shell.java - contains the run method and all its need to run the program
+    Driver.java - contains the main function (was not changed)
+        img_to_char package-
+            BrightnessImgCharMatcher- contains the whole process of matching a character to a miniPic
+            CharRenderer- was not changed
+Image package-
+    Image.java- an interface that is implemented by the miniPic class and FileIMage class
+    FileImage - when an image file is open, we save it as an FileImage instant
+    MiniPic - a sub image of an image. minipics are always squared and "contained" in its parent image.
+    ImageIterableProperty- contains the image iterator
+
+
+=============================
+=  Implementation details   =
+=============================
+
+most of the data that i produce (about character brightness, miniPic to character match, etc.) is stored
+in Hashmaps. the pros of using these data structures is that the searching time in it is dramatically
+ shorter. in order to make the search in the hashmap quicker i overrided the hash code function of the
+ miniPic and made it more presice (considering the pixelArray that is holded by a minipic).
+i implemented a few hash maps in my code:
+one to match a character to its calculated brightness - this hashmap is initialized once and can be used
+through the whole program run (if no new chars where added)
+another hashmap is matching a normalized brightness to a character and finally i match a mini pic to its
+character after calculating its brightness.
+further more, the run function is working with the same brightnessImgMatcher the whole run, and by that
+we save the running time of initializing a matcher.
+
+i chose to implement an iterator for the image class in order to make
+the miniPics production easier and more efficient momerywise. when using an iterator that onluy point to the
+next object we can avoid unneeded space using of put all miniPic objects in an array.
+the iterator iterate in gaps (jump) that is given to the ImageIterableProperty constructor as an argument.
+this constructor is a loaded on the normal constructor that is also can be used. (העמסה על הקונסטרקטור)
+
+=============================
+=    running time analyze   =
+=============================
+
+initializing the diffrent hashmaps depends on two main thing- number of characters in the characters set - C
+number of miniPics that we divde the big image to - RES.
+
+when calling the the choose chars function for the first time we always intialize all hashmaps in O(C+RES)
+time complexity. in the following times, if the character set was not changed the complexity time will be
+O(RES) (i chose not to change it if the characters set is not changed).
+
+the big advantage of using maps is the hort search time for a key and its value y O(1) amortized. in order to
+make sure that the placing and searching time of a single object in the map will be shorter i managed to
+change the miniPic hash code to make more varaity between diffren miniPic objects.
+=============================
+=    memory analyze   =
+=============================
+using the hashmaps is efficient in time complexity manners, but it demands much of memory space.
+we save 4 hashmaps that contain (O(C+RES)) keys in them and that is the space complexity.
+
+nore over, in order to avoid repeating initialization of the maps, we compare lists which also demand time
+and memory for copting to a new set.

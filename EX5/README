@@ -1,0 +1,35 @@
+Ori Sharon
+Itamar Nini
+
+
+EXPLANATION OF HOW WE MADE THE NEVER ENDING WORLD
+in each call to the Update function of the Game Manager we calculate the range between the previous camera's
+scope to the new one. in the gap between the two we create new blocks and trees where needed, and on the
+opposite side to the avatar movement. The blocks of each X column are contained in a List. after the creation
+of hte whole column we put it in an hashmap that is used to prevent the creation of other blocks in the same
+place and the remove them more easily when needed.
+when we remove a certain column we iterate on all block object of a certain list and remove it from the board.
+the strategy of removing trees is a little different- when we create a tree we add it to a hashmap that
+holds the X location of the tree as a key and the tree object is self as its value. on each call to the
+game manager update function we check if the are trees within the x delta that is needed to be erased by
+iterating the keys array of this hashmap, and delete the tree objects in that range from the window and from
+the hashmap. this hashmap is also used to prevent creating new trees where a tree is already existed.
+in order to recreate the exact same world, the noise generator is receiving an x coordinate as a seed and
+calculate the terrain height at that point without any probability considerations. The tree creator is
+generating a new Random object with a seed that contains the x location
+ so it supplies the same boolean answer
+to creation of a tree in a specific x location (and its size, type, etc).
+
+HOW WE IMPLEMENTED THE TREE PACKAGE
+ Our tree package contains 3 classed- The Leaf class, that extends the GameObject class, the Tree class, that
+ is responsible of creating the tree objects, and the TreeObjects class that
+ each tree on the board is an instance of it.
+ The Tree class is more like a Forest class- it holds the data of the location of all tree objects,
+ and conducts the creating and removing of the tree objects from the window. We made this class in order
+ to manage all treeObject instances on the window - create and delete when needed.
+ the TreeObject class is the actual tree instant class. each TreeObject is holding a list of Leaf objects and
+ a list of block objects as its trunk. Using this approach makes the deletion
+ and creation of a tree much easier because all of its components are concentrated in the same place.
+
+ The Leaf class extends GameObjects. we use the GameObject functionality when we set velocity to the leaf when
+ it falls, and when we use OnCollisionEnter function when the leaf hits the ground.

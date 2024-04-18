@@ -1,0 +1,30 @@
+itamarni
+207047150
+
+whatever player-
+chooses a random coordinate and mark it if it is possible.
+
+clever player-
+in 75% goes from the first row and try to mark a square in it by order
+in the other 25% of the time chooses randomly
+
+genius player-
+look for the least marked culonm and fill it by order
+
+היתרון בכתיבת תוכנה בצורה כזו היא שהקוד מודולרי יותר- לשם הדוגמא נוכל להוסיף סוגי שחקנים חדשים למשחק בקלות יחסית אף בלי לשנות את הקוד שכבר כתבנו ( לפחות במקרה הזה). בנוסף קל יותר לחלק את כתית הפרוייקט לתפקידים- שלד הפרוייקט- הלוח, הרצת המשחק עצמו וכיוצא בכך, לא מכיר ולא צריך להכיר את הדרך בה פלייר ממש את המתודה הידועה שלו.
+
+######### Results #########
+Player 1, clever won: 7298 rounds
+Player 2, whatever won: 2694 rounds
+Ties: 8
+
+######### Results #########
+Player 1, genius won: 6759 rounds
+Player 2, clever won: 3240 rounds
+Ties: 1
+
+
+######### Results #########
+Player 1, whatever won: 5034 rounds
+Player 2, whatever won: 4945 rounds
+Ties: 21
